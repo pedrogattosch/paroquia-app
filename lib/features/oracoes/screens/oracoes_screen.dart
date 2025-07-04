@@ -56,6 +56,30 @@ na vida eterna. Amém.''',
       'texto': '''Glória ao Pai, ao Filho e ao Espírito Santo,
 como era no princípio, agora e sempre. Amém.''',
     },
+    {
+      'titulo': 'Ó meu Jesus',
+      'texto': '''Ó meu Jesus, perdoai-nos, 
+livrai-nos do fogo do inferno,
+levai as almas todas para o céu
+e socorrei principalmente aquelas que 
+mais precisarem da vossa misericórdia. Amém.''',
+    },
+    {
+      'titulo': 'Salve Rainha',
+      'texto': '''Salve, Rainha
+Mãe de misericórdia,
+vida, doçura, esperança nossa, salve!
+A vós brandamos os degredados filhos de Eva.
+A vós suspiramos, gemendo e chorando
+neste vale de lágrima.
+Eia, pois, advogada nossa,
+esses vossos olhos misericordiosos a nós volvei,
+e depois deste desterro mostrai-nos Jesus,
+bendito fruto do vosso ventre.
+Ó clemente, ó piedosa, ó doce sempre Virgem Maria.
+V.: Rogai por nós santa Mãe de Deus.
+R.: Para que sejamos dignos das promessas de Cristo.''',
+    },
   ];
 
   @override
