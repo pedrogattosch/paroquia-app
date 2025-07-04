@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OracoesScreen extends StatelessWidget {
   final List<Map<String, String>> oracoes = [
@@ -8,47 +9,103 @@ class OracoesScreen extends StatelessWidget {
 santificado seja o vosso nome;
 venha a nós o vosso reino;
 seja feita a vossa vontade,
-assim na terra como no céu...
+assim na terra como no céu.
 
-(Oração completa aqui)'''
+O pão nosso de cada dia nos dai hoje;
+perdoai-nos as nossas ofensas,
+assim como nós perdoamos
+a quem nos tem ofendido;
+e não nos deixeis cair em tentação,
+mas livrai-nos do mal. Amém.''',
     },
     {
       'titulo': 'Ave Maria',
       'texto': '''Ave Maria, cheia de graça,
 o Senhor é convosco,
-bendita sois vós entre as mulheres...
+bendita sois vós entre as mulheres,
+e bendito é o fruto do vosso ventre, Jesus.
 
-(Oração completa aqui)'''
+Santa Maria, Mãe de Deus,
+rogai por nós pecadores,
+agora e na hora da nossa morte. Amém.''',
     },
     {
-      'titulo': 'Creio (Símbolo dos Apóstolos)',
+      'titulo': 'Creio',
       'texto': '''Creio em Deus Pai todo-poderoso,
-criador do céu e da terra...
+criador do céu e da terra.
+E em Jesus Cristo, seu único Filho, nosso Senhor,
+que foi concebido pelo poder do Espírito Santo;
+nasceu da Virgem Maria;
+padeceu sob Pôncio Pilatos,
+foi crucificado, morto e sepultado.
 
-(Oração completa aqui)'''
+Desceu à mansão dos mortos;
+ressuscitou ao terceiro dia;
+subiu aos céus,
+onde está sentado à direita de Deus Pai todo-poderoso,
+de onde há de vir a julgar os vivos e os mortos.
+Creio no Espírito Santo,
+na Santa Igreja Católica,
+na comunhão dos santos,
+na remissão dos pecados,
+na ressurreição da carne,
+na vida eterna. Amém.''',
     },
     {
       'titulo': 'Glória ao Pai',
       'texto': '''Glória ao Pai, ao Filho e ao Espírito Santo,
-como era no princípio, agora e sempre. Amém.'''
+como era no princípio, agora e sempre. Amém.''',
     },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Orações')),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: Text(
+          'Orações',
+          style: GoogleFonts.robotoSlab(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+      ),
       body: ListView.builder(
-        itemCount: oracoes.length,
         padding: const EdgeInsets.all(16),
+        itemCount: oracoes.length,
         itemBuilder: (context, index) {
           final oracao = oracoes[index];
-          return Card(
-            elevation: 3,
+          return Container(
             margin: const EdgeInsets.only(bottom: 12),
+            decoration: BoxDecoration(
+              color: Colors.grey[50],
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: ListTile(
-              title: Text(oracao['titulo']!),
-              trailing: Icon(Icons.arrow_forward_ios),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 20, vertical: 16),
+              title: Text(
+                oracao['titulo']!,
+                style: GoogleFonts.openSans(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.blueGrey[800],
+                ),
+              ),
+              trailing: Icon(Icons.chevron_right, color: Colors.blueGrey[400]),
               onTap: () {
                 Navigator.push(
                   context,
@@ -81,12 +138,38 @@ class OracaoDetalheScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(titulo)),
-      body: Padding(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: Text(
+          titulo,
+          style: GoogleFonts.robotoSlab(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Text(
           texto,
-          style: TextStyle(fontSize: 16, height: 1.5),
+          style: GoogleFonts.openSans(
+            fontSize: 16,
+            height: 1.8,
+            color: Colors.blueGrey[800],
+          ),
+          textAlign: TextAlign.center,
         ),
       ),
     );
