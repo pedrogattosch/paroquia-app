@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AgendaScreen extends StatelessWidget {
   final Map<String, List<String>> programacaoSemana = {
     'Domingo': [
-      '08h00 - Missa com crianças',
-      '10h00 - Missa solene',
-      '19h00 - Grupo de Oração',
+      '08h00 - Missa',
+      '19h00 - Missa',
     ],
     'Segunda': [
-      '19h30 - Terço dos Homens',
+
     ],
     'Terça': [
-      '18h00 - Missa',
-      '19h00 - Ensaio do coral',
+
     ],
     'Quarta': [
-      '19h30 - Grupo de Jovens',
+      '19h00 - Missa',
     ],
     'Quinta': [
-      '15h00 - Adoração ao Santíssimo',
-      '18h30 - Missa',
+
     ],
     'Sexta': [
-      '19h00 - Reunião da Pastoral Familiar',
+
     ],
     'Sábado': [
-      '17h00 - Missa',
-      '18h30 - Preparação para Batismo',
+      '19h00 - Missa',
     ],
   };
 
@@ -37,10 +34,33 @@ class AgendaScreen extends StatelessWidget {
     return DefaultTabController(
       length: dias.length,
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('Agenda da Semana'),
+          elevation: 0,
+          centerTitle: true,
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+          ),
+          title: Text(
+            'Agenda',
+            style: GoogleFonts.robotoSlab(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
           bottom: TabBar(
             isScrollable: true,
+            indicatorColor: Colors.white,
+            labelStyle: GoogleFonts.openSans(fontWeight: FontWeight.w600),
+            unselectedLabelColor: Colors.white,
+            labelColor: Colors.white,
             tabs: dias.map((dia) => Tab(text: dia)).toList(),
           ),
         ),
@@ -51,15 +71,32 @@ class AgendaScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               itemCount: eventos.length,
               itemBuilder: (context, index) {
-                return Card(
+                return Container(
                   margin: const EdgeInsets.only(bottom: 12),
-                  shape: RoundedRectangleBorder(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  elevation: 3,
                   child: ListTile(
-                    leading: Icon(Icons.event, color: Colors.blueGrey),
-                    title: Text(eventos[index]),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16, vertical: 12),
+                    leading: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.blue[50],
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(Icons.event, 
+                        color: Colors.blue[800], size: 20),
+                    ),
+                    title: Text(
+                      eventos[index],
+                      style: GoogleFonts.openSans(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.blueGrey[800],
+                      ),
+                    ),
                   ),
                 );
               },
