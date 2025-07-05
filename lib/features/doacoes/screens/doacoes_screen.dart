@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DoacoesScreen extends StatelessWidget {
   final String chavePix = 'pix@paroquiameninodeus.org';
@@ -9,63 +10,107 @@ class DoacoesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Doações')),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: Text(
+          'Doações',
+          style: GoogleFonts.robotoSlab(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'Contribua com a Paróquia',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.blueGrey[800],
-              ),
-              textAlign: TextAlign.center,
-            ),
             const SizedBox(height: 16),
             Text(
               mensagem,
-              style: TextStyle(fontSize: 16, color: Colors.black87),
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                color: Colors.blueGrey[700],
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
             Container(
               height: 180,
               width: 180,
-              color: Colors.grey[300],
+              decoration: BoxDecoration(
+                color: Colors.grey[50],
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.blue[100]!),
+              ),
               alignment: Alignment.center,
-              child: Text('QR Code\n(Pix)', textAlign: TextAlign.center),
+              child: Text(
+                'QR Code\n(Pix)',
+                style: GoogleFonts.openSans(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.blueGrey[600],
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
             const SizedBox(height: 16),
-            SelectableText(
-              chavePix,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.grey[50],
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.blue[100]!),
+              ),
+              child: SelectableText(
+                chavePix,
+                style: GoogleFonts.openSans(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue[800],
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: () {
                 Clipboard.setData(ClipboardData(text: chavePix));
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Chave Pix copiada!')),
+                  SnackBar(
+                    content: Text(
+                      'Chave Pix copiada!',
+                      style: GoogleFonts.openSans(),
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                  ),
                 );
               },
-              icon: Icon(Icons.copy),
-              label: Text('Copiar chave Pix'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueGrey,
-                foregroundColor: Colors.white,
+              icon: Icon(Icons.copy, size: 20),
+              label: Text(
+                'Copiar chave Pix',
+                style: GoogleFonts.openSans(fontWeight: FontWeight.w600),
               ),
-            ),
-            const SizedBox(height: 32),
-            ElevatedButton.icon(
-              onPressed: () {
-                // Exemplo de redirecionamento para PagSeguro, Mercado Pago, etc.
-              },
-              icon: Icon(Icons.link),
-              label: Text('Doar via site'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue[800],
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
             ),
           ],
         ),
