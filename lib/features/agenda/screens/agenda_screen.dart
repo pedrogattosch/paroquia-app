@@ -80,15 +80,6 @@ class AgendaScreen extends StatelessWidget {
                   child: ListTile(
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 16, vertical: 12),
-                    leading: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[50],
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(Icons.event, 
-                        color: Colors.blue[800], size: 20),
-                    ),
                     title: Text(
                       eventos[index],
                       style: GoogleFonts.openSans(
