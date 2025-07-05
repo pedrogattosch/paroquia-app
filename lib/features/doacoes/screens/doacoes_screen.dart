@@ -85,7 +85,7 @@ class DoacoesScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            ElevatedButton.icon(
+            ElevatedButton(
               onPressed: () {
                 Clipboard.setData(ClipboardData(text: chavePix));
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -98,11 +98,6 @@ class DoacoesScreen extends StatelessWidget {
                   ),
                 );
               },
-              icon: Icon(Icons.copy, size: 20),
-              label: Text(
-                'Copiar chave Pix',
-                style: GoogleFonts.openSans(fontWeight: FontWeight.w600),
-              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue[800],
                 foregroundColor: Colors.white,
@@ -110,6 +105,11 @@ class DoacoesScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
+                elevation: 0, // Remove a sombra do botão
+              ),
+              child: Text(
+                'Copiar chave Pix',
+                style: GoogleFonts.openSans(fontWeight: FontWeight.w600),
               ),
             ),
           ],

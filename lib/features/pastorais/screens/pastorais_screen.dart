@@ -1,63 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PastoraisScreen extends StatelessWidget {
   final List<Map<String, String>> pastorais = [
     {
-      'nome': 'Pastoral da Juventude',
-      'descricao': 'Grupo voltado para os jovens da comunidade.',
+      'nome': 'Nome',
+      'descricao': 'Descrição',
       'horario': 'Quartas às 19h30',
-    },
-    {
-      'nome': 'Ministério de Música',
-      'descricao': 'Responsável pela animação das missas e eventos.',
-      'horario': 'Terças às 19h',
-    },
-    {
-      'nome': 'Pastoral da Família',
-      'descricao': 'Apoio às famílias da paróquia.',
-      'horario': 'Sextas às 20h',
-    },
-    {
-      'nome': 'Liturgia',
-      'descricao': 'Organização das celebrações litúrgicas.',
-      'horario': 'Domingos antes da missa das 10h',
     },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Pastorais')),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: Text(
+          'Pastorais',
+          style: GoogleFonts.robotoSlab(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+      ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: pastorais.length,
         itemBuilder: (context, index) {
           final pastoral = pastorais[index];
-          return Card(
-            elevation: 4,
-            margin: const EdgeInsets.only(bottom: 16),
-            shape: RoundedRectangleBorder(
+          return Container(
+            margin: const EdgeInsets.only(bottom: 12),
+            decoration: BoxDecoration(
+              color: Colors.grey[50],
               borderRadius: BorderRadius.circular(12),
             ),
             child: ListTile(
-              contentPadding: const EdgeInsets.all(16),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16, vertical: 12),
               title: Text(
                 pastoral['nome']!,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: GoogleFonts.openSans(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.blueGrey[800],
+                ),
               ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 8),
-                  Text(pastoral['descricao']!),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Encontros: ${pastoral['horario']}',
-                    style: TextStyle(color: Colors.grey[600], fontSize: 13),
-                  ),
-                ],
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      pastoral['descricao']!,
+                      style: GoogleFonts.openSans(
+                        fontSize: 14,
+                        color: Colors.blueGrey[600],
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      'Encontros: ${pastoral['horario']}',
+                      style: GoogleFonts.openSans(
+                        fontSize: 13,
+                        color: Colors.blue[800],
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              trailing: Icon(Icons.groups),
             ),
           );
         },
