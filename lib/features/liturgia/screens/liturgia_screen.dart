@@ -1,65 +1,232 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
-class LiturgiaScreen extends StatelessWidget {
-  final Map<String, String> liturgiaDoDia = {
-    'data': '22 de Junho de 2025',
-    'leitura1': '1ª Leitura: Gênesis 18,1-10a',
-    'salmo': 'Salmo 14(15): "Senhor, quem morará em vossa casa?"',
-    'evangelho': 'Evangelho: Lucas 10,38-42',
-  };
+class LiturgiaScreen extends StatefulWidget {
+  @override
+  _LiturgiaScreenState createState() => _LiturgiaScreenState();
+}
+
+class _LiturgiaScreenState extends State<LiturgiaScreen> {
+  Map<String, dynamic> liturgiaData = {};
+  bool isLoading = true;
+  String errorMessage = '';
+  bool isOffline = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // 🔴 Carregando dados de localização pt_BR
+    initializeDateFormatting('pt_BR', null).then((_) {
+      _fetchLiturgiaData();
+    });
+  }
+
+  Future<bool> _checkInternetConnection() async {
+    final connectivityResult = await Connectivity().checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
+  }
+
+  Future<void> _fetchLiturgiaData() async {
+    setState(() {
+      isLoading = true;
+      errorMessage = '';
+    });
+
+    if (!await _checkInternetConnection()) {
+      setState(() {
+        errorMessage = 'Sem conexão com a internet';
+        isLoading = false;
+        isOffline = true;
+      });
+      return;
+    }
+
+    try {
+      final hoje = DateFormat('yyyy-MM-dd').format(DateTime.now());
+      final url = Uri.parse('https://api-liturgia-diaria.vercel.app/cn?date=$hoje');
+      final response = await http.get(url).timeout(const Duration(seconds: 10));
+
+      print('👉 Status: ${response.statusCode}');
+      print('👉 Body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final todayData = data['today'];
+
+        setState(() {
+          liturgiaData = {
+            'data': DateFormat('EEEE, d \'de\' MMMM \'de\' y', 'pt_BR')
+                .format(DateTime.now()),
+            'primeiraLeitura': _extractHtml(todayData['readings']['first_reading']['all_html']),
+            'salmo': _extractHtml(todayData['readings']['psalm']['all_html']),
+            'evangelho': _extractHtml(todayData['readings']['gospel']['all_html']),
+            'cor': todayData['color'] ?? 'verde',
+          };
+          isLoading = false;
+          isOffline = false;
+        });
+      } else {
+        throw Exception('Status ${response.statusCode}');
+      }
+    } catch (e) {
+      print('👉 Erro: $e');
+      setState(() {
+        errorMessage = 'Não foi possível carregar a liturgia diária';
+        isLoading = false;
+      });
+    }
+  }
+
+  /// Função para remover HTML e deixar o texto limpo
+  String _extractHtml(String htmlText) {
+    final regex = RegExp(r'<[^>]*>', multiLine: true, caseSensitive: true);
+    return htmlText.replaceAll(regex, '').trim();
+  }
+
+  Color _getCorLiturgica() {
+    switch (liturgiaData['cor']?.toLowerCase()) {
+      case 'branco':
+        return Colors.white;
+      case 'vermelho':
+        return Colors.red;
+      case 'verde':
+        return Colors.green;
+      case 'roxo':
+        return Colors.purple;
+      case 'rosa':
+        return Colors.pink;
+      default:
+        return Colors.blue;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Liturgia Diária')),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: Text(
+          'Liturgia',
+          style: GoogleFonts.robotoSlab(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: _fetchLiturgiaData,
+          ),
+        ],
+      ),
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    if (isLoading) return Center(child: CircularProgressIndicator());
+
+    if (errorMessage.isNotEmpty) {
+      return Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Liturgia de Hoje',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.blueGrey[800],
+            Text(errorMessage, style: GoogleFonts.openSans(fontSize: 16)),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _fetchLiturgiaData,
+              child: Text('Tentar novamente'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue[800],
+                foregroundColor: Colors.white,
               ),
             ),
-            const SizedBox(height: 12),
-            Text(
-              liturgiaDoDia['data']!,
-              style: TextStyle(fontSize: 16, color: Colors.grey[700]),
-            ),
-            const Divider(height: 32),
-            _blocoTexto('1ª Leitura', liturgiaDoDia['leitura1']!),
-            const SizedBox(height: 20),
-            _blocoTexto('Salmo', liturgiaDoDia['salmo']!),
-            const SizedBox(height: 20),
-            _blocoTexto('Evangelho', liturgiaDoDia['evangelho']!),
           ],
         ),
+      );
+    }
+
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: _getCorLiturgica().withOpacity(0.2),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: _getCorLiturgica()),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.calendar_today, color: _getCorLiturgica()),
+                SizedBox(width: 8),
+                Text(
+                  liturgiaData['data'],
+                  style: GoogleFonts.openSans(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: _getCorLiturgica(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 16),
+          _buildSection('Primeira Leitura', liturgiaData['primeiraLeitura']),
+          _buildSection('Salmo', liturgiaData['salmo']),
+          _buildSection('Evangelho', liturgiaData['evangelho']),
+        ],
       ),
     );
   }
 
-  Widget _blocoTexto(String titulo, String conteudo) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          titulo,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: Colors.blueGrey[700],
+  Widget _buildSection(String title, String? content) {
+    if (content == null || content.isEmpty) return SizedBox();
+    return Padding(
+      padding: EdgeInsets.only(bottom: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: GoogleFonts.openSans(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Colors.blue[800],
+            ),
           ),
-        ),
-        const SizedBox(height: 6),
-        Text(
-          conteudo,
-          style: TextStyle(fontSize: 16),
-        ),
-      ],
+          SizedBox(height: 8),
+          Container(
+            padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.grey[50],
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.blue[100]!),
+            ),
+            child: Text(content, style: GoogleFonts.openSans(fontSize: 16)),
+          ),
+        ],
+      ),
     );
   }
 }
