@@ -21,7 +21,6 @@ class _LiturgiaScreenState extends State<LiturgiaScreen> {
   @override
   void initState() {
     super.initState();
-    // 🔴 Carregando dados de localização pt_BR
     initializeDateFormatting('pt_BR', null).then((_) {
       _fetchLiturgiaData();
     });
@@ -52,9 +51,6 @@ class _LiturgiaScreenState extends State<LiturgiaScreen> {
       final url = Uri.parse('https://api-liturgia-diaria.vercel.app/cn?date=$hoje');
       final response = await http.get(url).timeout(const Duration(seconds: 10));
 
-      print('👉 Status: ${response.statusCode}');
-      print('👉 Body: ${response.body}');
-
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         final todayData = data['today'];
@@ -75,7 +71,6 @@ class _LiturgiaScreenState extends State<LiturgiaScreen> {
         throw Exception('Status ${response.statusCode}');
       }
     } catch (e) {
-      print('👉 Erro: $e');
       setState(() {
         errorMessage = 'Não foi possível carregar a liturgia diária';
         isLoading = false;
@@ -83,7 +78,6 @@ class _LiturgiaScreenState extends State<LiturgiaScreen> {
     }
   }
 
-  /// Função para remover HTML e deixar o texto limpo
   String _extractHtml(String htmlText) {
     final regex = RegExp(r'<[^>]*>', multiLine: true, caseSensitive: true);
     return htmlText.replaceAll(regex, '').trim();
@@ -176,23 +170,17 @@ class _LiturgiaScreenState extends State<LiturgiaScreen> {
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: _getCorLiturgica()),
             ),
-            child: Row(
-              children: [
-                Icon(Icons.calendar_today, color: _getCorLiturgica()),
-                SizedBox(width: 8),
-                Text(
-                  liturgiaData['data'],
-                  style: GoogleFonts.openSans(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: _getCorLiturgica(),
-                  ),
-                ),
-              ],
+            child: Text(
+              liturgiaData['data'],
+              style: GoogleFonts.openSans(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: _getCorLiturgica(),
+              ),
             ),
           ),
           SizedBox(height: 16),
-          _buildSection('Primeira Leitura', liturgiaData['primeiraLeitura']),
+          _buildSection('Primeira leitura', liturgiaData['primeiraLeitura']),
           _buildSection('Salmo', liturgiaData['salmo']),
           _buildSection('Evangelho', liturgiaData['evangelho']),
         ],
