@@ -59,22 +59,21 @@ class InformacoesScreen extends StatelessWidget {
             Text('Endereço:', style: _titulo()),
             Text(endereco, style: _texto()),
             const SizedBox(height: 16),
-            ElevatedButton(
+            TextButton(
               onPressed: _abrirNoMaps,
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.grey[100],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              ),
               child: Text(
                 'Ver no mapa',
                 style: GoogleFonts.openSans(
                   fontWeight: FontWeight.w600,
                   color: Colors.blueGrey[800],
                 ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey[100],
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               ),
             ),
             const SizedBox(height: 24),
