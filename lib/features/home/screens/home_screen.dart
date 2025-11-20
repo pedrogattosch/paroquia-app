@@ -2,21 +2,74 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatelessWidget {
-  final List<_MenuItem> menuItems = [
-    _MenuItem(icon: Icons.info_outline, label: 'Informações', route: '/informacoes'),
-    _MenuItem(icon: Icons.event_available, label: 'Agenda', route: '/agenda'),
-    _MenuItem(icon: Icons.article_outlined, label: 'Notícias', route: '/noticias'),
-    _MenuItem(icon: Icons.menu_book_outlined, label: 'Liturgia', route: '/liturgia'),
-    _MenuItem(icon: Icons.favorite_border, label: 'Orações', route: '/oracoes'),
-    _MenuItem(icon: Icons.groups_outlined, label: 'Pastorais', route: '/pastorais'),
-    _MenuItem(icon: Icons.volunteer_activism_outlined, label: 'Doações', route: '/doacoes'),
-  ];
+  Widget _buildContentCard({
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required VoidCallback onTap,
+    Color color = const Color(0xFF1565C0),
+  }) {
+    return Card(
+      elevation: 1,
+      margin: const EdgeInsets.only(bottom: 10),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: ListTile(
+        leading: Icon(icon, color: color),
+        title: Text(title, style: GoogleFonts.openSans(fontWeight: FontWeight.w600, color: Colors.blueGrey[800])),
+        subtitle: Text(subtitle, style: GoogleFonts.openSans(fontSize: 14, color: Colors.blueGrey[600])),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: onTap,
+      ),
+    );
+  }
 
-  final LinearGradient iconGradient = const LinearGradient(
-    colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
+  // Banner com mensagem bíblica
+  Widget _buildMessageBanner(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.only(bottom: 24),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFF42A5F5), Color(0xFF1565C0)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.blue,
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'João 14:6',
+            style: GoogleFonts.robotoSlab(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            '"Eu sou o caminho, a verdade e a vida. Ninguém vem ao Pai, senão por mim."',
+            style: GoogleFonts.openSans(
+              fontSize: 17,
+              fontStyle: FontStyle.italic,
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,86 +99,69 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
 
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Bem-vindo!',
-              style: GoogleFonts.openSans(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.blueGrey[800],
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Escolha uma das opções abaixo:',
-              style: GoogleFonts.openSans(
-                fontSize: 16,
-                color: Colors.black54,
-              ),
-            ),
-            const SizedBox(height: 28),
 
-            Expanded(
-              child: GridView.builder(
-                itemCount: menuItems.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
-                ),
-                itemBuilder: (context, index) {
-                  final item = menuItems[index];
-                  return InkWell(
-                    borderRadius: BorderRadius.circular(16),
-                    onTap: () => Navigator.pushNamed(context, item.route),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[100],
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ShaderMask(
-                            shaderCallback: (bounds) =>
-                                iconGradient.createShader(bounds),
-                            child: Icon(
-                              item.icon,
-                              size: 36,
-                              color: Colors.white, // será "mascarado" pelo gradiente
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            item.label,
-                            style: GoogleFonts.openSans(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.blueGrey[900],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+            // 1. Frase bíblica em destaque
+            _buildMessageBanner(context),
+            
+            // 2. Pré-visualização de notícias
+            Text(
+              'Últimas notícias',
+              style: GoogleFonts.robotoSlab(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Colors.blue[800],
               ),
             ),
+            const SizedBox(height: 12),
+            _buildContentCard(
+              title: 'Missa',
+              subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+              icon: Icons.article_outlined,
+              onTap: () => Navigator.pushNamed(context, '/noticias'),
+            ),
+            _buildContentCard(
+              title: 'Missa',
+              subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+              icon: Icons.article_outlined,
+              onTap: () => Navigator.pushNamed(context, '/noticias'),
+            ),
+            
+            const SizedBox(height: 24),
+            
+            // 3. Pré-visualização de eventos
+            Text(
+              'Próximos eventos',
+              style: GoogleFonts.robotoSlab(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Colors.blue[800],
+              ),
+            ),
+            const SizedBox(height: 12),
+            _buildContentCard(
+              title: 'Evento',
+              subtitle: 'lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+              icon: Icons.event_available,
+              onTap: () => Navigator.pushNamed(context, '/agenda'),
+              color: Colors.green,
+            ),
+            _buildContentCard(
+              title: 'Evento',
+              subtitle: 'lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+              icon: Icons.event_available,
+              onTap: () => Navigator.pushNamed(context, '/agenda'),
+              color: Colors.green,
+            ),
+            
+            const SizedBox(height: 24),
           ],
         ),
       ),
     );
   }
-}
-
-class _MenuItem {
-  final IconData icon;
-  final String label;
-  final String route;
-
-  _MenuItem({required this.icon, required this.label, required this.route});
 }
