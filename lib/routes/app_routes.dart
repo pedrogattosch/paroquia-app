@@ -6,10 +6,11 @@ import '../features/liturgia/screens/liturgia_screen.dart';
 import '../features/oracoes/screens/oracoes_screen.dart';
 import '../features/pastorais/screens/pastorais_screen.dart';
 import '../features/doacoes/screens/doacoes_screen.dart';
+import '../menu.dart';
 
 class AppRoutes {
   static final routes = {
-    '/': (context) => HomeScreen(),
+    '/': (context) => Menu(),
     '/informacoes': (context) => InformacoesScreen(),
     '/agenda': (context) => AgendaScreen(),
     '/noticias': (context) => NoticiasScreen(),
