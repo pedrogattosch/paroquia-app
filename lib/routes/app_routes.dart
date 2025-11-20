@@ -1,4 +1,3 @@
-import '../features/home/screens/home_screen.dart';
 import '../features/informacoes/screens/informacoes_screen.dart';
 import '../features/agenda/screens/agenda_screen.dart';
 import '../features/noticias/screens/noticias_screen.dart';

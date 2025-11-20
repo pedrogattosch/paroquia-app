@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'features/home/screens/home_screen.dart';
 import 'features/agenda/screens/agenda_screen.dart';
 import 'features/liturgia/screens/liturgia_screen.dart';
-// import 'features/mais_opcoes/screens/mais_opcoes_screen.dart';
+import 'features/mais_opcoes/screens/mais_opcoes_screen.dart';
 
 class Menu extends StatefulWidget {
   @override
@@ -18,6 +17,7 @@ class _MenuState extends State<Menu> {
     HomeScreen(),
     AgendaScreen(),
     LiturgiaScreen(),
+    MaisOpcoesScreen()
   ];
 
   void _onItemTapped(int index) {
@@ -35,7 +35,6 @@ class _MenuState extends State<Menu> {
         index: _selectedIndex,
         children: _screens,
       ), 
-      
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -54,6 +53,10 @@ class _MenuState extends State<Menu> {
           BottomNavigationBarItem(
             icon: Icon(Icons.event_available_outlined),
             label: 'Agenda',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.more_horiz),
+            label: 'Mais opções',
           ),
         ],
       ),
