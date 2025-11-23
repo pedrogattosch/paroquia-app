@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatelessWidget {
+  // Card para notícias e eventos
   Widget _buildContentCard({
     required String title,
     required String subtitle,
@@ -10,9 +11,10 @@ class HomeScreen extends StatelessWidget {
     Color color = const Color(0xFF1565C0),
   }) {
     return Card(
-      elevation: 1,
+      color: Colors.grey[100],
+      elevation: 0,
       margin: const EdgeInsets.only(bottom: 10),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: ListTile(
         leading: Icon(icon, color: color),
         title: Text(title, style: GoogleFonts.openSans(fontWeight: FontWeight.w600, color: Colors.blueGrey[800])),
@@ -36,31 +38,39 @@ class HomeScreen extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.blue,
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // Ícone decorativo adicionado
+          const Icon(
+            Icons.book_outlined,
+            color: Colors.white,
+            size: 28,
+          ),
+          const SizedBox(height: 12),
           Text(
             'João 14:6',
             style: GoogleFonts.robotoSlab(
-              fontSize: 16,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 8),
+          // Linha divisória sutil
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            height: 2,
+            width: 50,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.5), 
+              borderRadius: BorderRadius.circular(1),
+            ),
+          ),
           Text(
             '"Eu sou o caminho, a verdade e a vida. Ninguém vem ao Pai, senão por mim."',
             style: GoogleFonts.openSans(
-              fontSize: 17,
+              fontSize: 18,
               fontStyle: FontStyle.italic,
               color: Colors.white,
             ),
@@ -111,7 +121,7 @@ class HomeScreen extends StatelessWidget {
             // 2. Pré-visualização de notícias
             Text(
               'Últimas notícias',
-              style: GoogleFonts.robotoSlab(
+              style: GoogleFonts.openSans(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
                 color: Colors.blue[800],
