@@ -16,8 +16,8 @@ class _MenuState extends State<Menu> {
 
   static final List<Widget> _screens = <Widget>[
     HomeScreen(),
-    AgendaScreen(),
     LiturgiaScreen(),
+    AgendaScreen(),
     MaisOpcoesScreen(),
   ];
 
