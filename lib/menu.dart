@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'features/home/screens/home_screen.dart';
 import 'features/agenda/screens/agenda_screen.dart';
@@ -17,7 +18,7 @@ class _MenuState extends State<Menu> {
     HomeScreen(),
     AgendaScreen(),
     LiturgiaScreen(),
-    MaisOpcoesScreen()
+    MaisOpcoesScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -37,10 +38,16 @@ class _MenuState extends State<Menu> {
       ), 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
+        backgroundColor: Colors.white,
+        elevation: 0,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: const Color(0xFF1565C0), 
-        unselectedItemColor: Colors.blueGrey,
+        unselectedItemColor: Colors.blueGrey[400],
+        selectedLabelStyle: GoogleFonts.openSans(
+          fontWeight: FontWeight.w600,
+          fontSize: 12,
+        ),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),

@@ -54,7 +54,7 @@ class MaisOpcoesScreen extends StatelessWidget {
                             child: Icon(
                               item.icon,
                               size: 36,
-                              color: Colors.white, // será "mascarado" pelo gradiente
+                              color: Colors.white,
                             ),
                           ),
                           const SizedBox(height: 8),
