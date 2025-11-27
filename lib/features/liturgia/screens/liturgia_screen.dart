@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import '../../../core/colors.dart';
 
 class LiturgiaScreen extends StatefulWidget {
   @override
@@ -103,17 +104,12 @@ class _LiturgiaScreenState extends State<LiturgiaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
         flexibleSpace: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: kAppBarGradient,
           ),
         ),
         title: Text(
@@ -149,7 +145,7 @@ class _LiturgiaScreenState extends State<LiturgiaScreen> {
               onPressed: _fetchLiturgiaData,
               child: Text('Tentar novamente'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue[800],
+                backgroundColor: kPrimaryColor,
                 foregroundColor: Colors.white,
               ),
             ),
@@ -200,16 +196,15 @@ class _LiturgiaScreenState extends State<LiturgiaScreen> {
             style: GoogleFonts.openSans(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: Colors.blue[800],
+              color: kPrimaryColor,
             ),
           ),
           SizedBox(height: 8),
           Container(
             padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.grey[50],
+              color: kCardBackgroundColor,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.blue[100]!),
             ),
             child: Text(content, style: GoogleFonts.openSans(fontSize: 16)),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/colors.dart';
 
 class NoticiasScreen extends StatelessWidget {
   final List<Map<String, String>> noticias = [
@@ -13,17 +14,12 @@ class NoticiasScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: kAppBarGradient
           ),
         ),
         title: Text(
@@ -43,7 +39,7 @@ class NoticiasScreen extends StatelessWidget {
           return Container(
             margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
-              color: Colors.grey[50],
+              color: kCardBackgroundColor,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Padding(
@@ -56,7 +52,7 @@ class NoticiasScreen extends StatelessWidget {
                     style: GoogleFonts.openSans(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
-                      color: Colors.blueGrey[800],
+                      color: kCardTitleColor,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -64,7 +60,7 @@ class NoticiasScreen extends StatelessWidget {
                     noticia['descricao']!,
                     style: GoogleFonts.openSans(
                       fontSize: 14,
-                      color: Colors.blueGrey[600],
+                      color: kTextColor,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -72,7 +68,7 @@ class NoticiasScreen extends StatelessWidget {
                     'Publicado em: ${noticia['data']}',
                     style: GoogleFonts.openSans(
                       fontSize: 12,
-                      color: Colors.blueGrey[400],
+                      color: kCardTextColor,
                     ),
                   ),
                 ],

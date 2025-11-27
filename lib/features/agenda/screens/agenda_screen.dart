@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/colors.dart';
 
 class AgendaScreen extends StatelessWidget {
   final Map<String, List<String>> programacaoSemana = {
@@ -34,17 +35,12 @@ class AgendaScreen extends StatelessWidget {
     return DefaultTabController(
       length: dias.length,
       child: Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
           flexibleSpace: Container(
             decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              gradient: kAppBarGradient,
             ),
           ),
           title: Text(
@@ -85,7 +81,7 @@ class AgendaScreen extends StatelessWidget {
                       style: GoogleFonts.openSans(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: Colors.blueGrey[800],
+                        color: kTextColor,
                       ),
                     ),
                   ),

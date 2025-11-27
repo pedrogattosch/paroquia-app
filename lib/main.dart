@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'routes/app_routes.dart';
+import 'core/colors.dart';
 
 void main() {
   runApp(ParoquiaMeninoDeusApp());
@@ -12,12 +13,7 @@ class ParoquiaMeninoDeusApp extends StatelessWidget {
       title: 'Paróquia Menino Deus',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.blueGrey,
-          foregroundColor: Colors.white,
-        ),
+        scaffoldBackgroundColor: kBackgroundColor,
       ),
       initialRoute: '/',
       routes: AppRoutes.routes,

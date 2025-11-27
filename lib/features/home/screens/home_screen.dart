@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/colors.dart';
 
 class HomeScreen extends StatelessWidget {
   // Card para notícias e eventos
@@ -8,17 +9,17 @@ class HomeScreen extends StatelessWidget {
     required String subtitle,
     required IconData icon,
     required VoidCallback onTap,
-    Color color = const Color(0xFF1565C0),
+    Color color = kPrimaryColor,
   }) {
     return Card(
-      color: Colors.grey[100],
+      color: kCardBackgroundColor,
       elevation: 0,
       margin: const EdgeInsets.only(bottom: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: ListTile(
         leading: Icon(icon, color: color),
-        title: Text(title, style: GoogleFonts.openSans(fontWeight: FontWeight.w600, color: Colors.blueGrey[800])),
-        subtitle: Text(subtitle, style: GoogleFonts.openSans(fontSize: 14, color: Colors.blueGrey[600])),
+        title: Text(title, style: GoogleFonts.openSans(fontWeight: FontWeight.w600, color: kCardTitleColor)),
+        subtitle: Text(subtitle, style: GoogleFonts.openSans(fontSize: 14, color: kCardTextColor)),
         trailing: const Icon(Icons.chevron_right),
         onTap: onTap,
       ),
@@ -32,11 +33,7 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.only(bottom: 24),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF42A5F5), Color(0xFF1565C0)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        gradient: kAppBarGradient,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -63,7 +60,7 @@ class HomeScreen extends StatelessWidget {
             height: 2,
             width: 50,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.5), 
+              color: const Color(0xFFFFFFFF), 
               borderRadius: BorderRadius.circular(1),
             ),
           ),
@@ -84,19 +81,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: kAppBarGradient,
           ),
         ),
         title: Text(
@@ -124,7 +115,7 @@ class HomeScreen extends StatelessWidget {
               style: GoogleFonts.openSans(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
-                color: Colors.blue[800],
+                color: kPrimaryColor,
               ),
             ),
             const SizedBox(height: 12),
@@ -149,7 +140,7 @@ class HomeScreen extends StatelessWidget {
               style: GoogleFonts.robotoSlab(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
-                color: Colors.blue[800],
+                color: kPrimaryColor,
               ),
             ),
             const SizedBox(height: 12),
@@ -158,14 +149,14 @@ class HomeScreen extends StatelessWidget {
               subtitle: 'lorem ipsum dolor sit amet, consectetur adipiscing elit.',
               icon: Icons.event_available,
               onTap: () => Navigator.pushNamed(context, '/agenda'),
-              color: Colors.green,
+              color: kSuccessColor,
             ),
             _buildContentCard(
               title: 'Evento',
               subtitle: 'lorem ipsum dolor sit amet, consectetur adipiscing elit.',
               icon: Icons.event_available,
               onTap: () => Navigator.pushNamed(context, '/agenda'),
-              color: Colors.green,
+              color: kSuccessColor,
             ),
             
             const SizedBox(height: 24),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/colors.dart';
 
 class MaisOpcoesScreen extends StatelessWidget {
   final List<_MenuItem> menuItems = [
@@ -11,12 +12,6 @@ class MaisOpcoesScreen extends StatelessWidget {
     _MenuItem(icon: Icons.groups_outlined, label: 'Pastorais', route: '/pastorais'),
     _MenuItem(icon: Icons.volunteer_activism_outlined, label: 'Doações', route: '/doacoes'),
   ];
-
-  final LinearGradient iconGradient = const LinearGradient(
-    colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +37,7 @@ class MaisOpcoesScreen extends StatelessWidget {
                     onTap: () => Navigator.pushNamed(context, item.route),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey[100],
+                        color: kCardBackgroundColor,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
@@ -50,7 +45,7 @@ class MaisOpcoesScreen extends StatelessWidget {
                         children: [
                           ShaderMask(
                             shaderCallback: (bounds) =>
-                                iconGradient.createShader(bounds),
+                                kAppBarGradient.createShader(bounds),
                             child: Icon(
                               item.icon,
                               size: 36,
@@ -63,7 +58,7 @@ class MaisOpcoesScreen extends StatelessWidget {
                             style: GoogleFonts.openSans(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: Colors.blueGrey[900],
+                              color: kCardTitleColor,
                             ),
                           ),
                         ],

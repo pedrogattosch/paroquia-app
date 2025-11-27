@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/colors.dart';
 
 class InformacoesScreen extends StatelessWidget {
   final String endereco = 'Rua Porto União, 901 - Jd. Porto Alegre, Toledo/PR';
@@ -35,11 +36,7 @@ class InformacoesScreen extends StatelessWidget {
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: kAppBarGradient
           ),
         ),
         title: Text(
@@ -62,7 +59,7 @@ class InformacoesScreen extends StatelessWidget {
             TextButton(
               onPressed: _abrirNoMaps,
               style: TextButton.styleFrom(
-                backgroundColor: Colors.grey[100],
+                backgroundColor: kCardBackgroundColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),

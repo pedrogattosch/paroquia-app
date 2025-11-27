@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/colors.dart';
 
 class OracoesScreen extends StatelessWidget {
   final List<Map<String, String>> oracoes = [
@@ -85,17 +86,12 @@ R.: Para que sejamos dignos das promessas de Cristo.''',
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: kAppBarGradient,
           ),
         ),
         title: Text(
@@ -115,7 +111,7 @@ R.: Para que sejamos dignos das promessas de Cristo.''',
           return Container(
             margin: const EdgeInsets.only(bottom: 12),
             decoration: BoxDecoration(
-              color: Colors.grey[50],
+              color: kCardBackgroundColor,
               borderRadius: BorderRadius.circular(12),
             ),
             child: ListTile(
@@ -126,10 +122,10 @@ R.: Para que sejamos dignos das promessas de Cristo.''',
                 style: GoogleFonts.openSans(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.blueGrey[800],
+                  color: kCardTitleColor,
                 ),
               ),
-              trailing: Icon(Icons.chevron_right, color: Colors.blueGrey[400]),
+              trailing: Icon(Icons.chevron_right, color: kCardTextColor),
               onTap: () {
                 Navigator.push(
                   context,
@@ -168,11 +164,7 @@ class OracaoDetalheScreen extends StatelessWidget {
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: kAppBarGradient,
           ),
         ),
         title: Text(
@@ -191,7 +183,7 @@ class OracaoDetalheScreen extends StatelessWidget {
           style: GoogleFonts.openSans(
             fontSize: 16,
             height: 1.8,
-            color: Colors.blueGrey[800],
+            color: kCardTextColor,
           ),
           textAlign: TextAlign.center,
         ),

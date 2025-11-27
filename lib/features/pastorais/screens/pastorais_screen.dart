@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/colors.dart';
 
 class PastoraisScreen extends StatelessWidget {
   final List<Map<String, String>> pastorais = [
@@ -19,11 +20,7 @@ class PastoraisScreen extends StatelessWidget {
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: kAppBarGradient,
           ),
         ),
         title: Text(
@@ -43,7 +40,7 @@ class PastoraisScreen extends StatelessWidget {
           return Container(
             margin: const EdgeInsets.only(bottom: 12),
             decoration: BoxDecoration(
-              color: Colors.grey[50],
+              color: kCardBackgroundColor,
               borderRadius: BorderRadius.circular(12),
             ),
             child: ListTile(
@@ -54,7 +51,7 @@ class PastoraisScreen extends StatelessWidget {
                 style: GoogleFonts.openSans(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.blueGrey[800],
+                  color: kCardTitleColor,
                 ),
               ),
               subtitle: Padding(
@@ -66,7 +63,7 @@ class PastoraisScreen extends StatelessWidget {
                       pastoral['descricao']!,
                       style: GoogleFonts.openSans(
                         fontSize: 14,
-                        color: Colors.blueGrey[600],
+                        color: kCardTextColor,
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -74,7 +71,7 @@ class PastoraisScreen extends StatelessWidget {
                       'Encontros: ${pastoral['horario']}',
                       style: GoogleFonts.openSans(
                         fontSize: 13,
-                        color: Colors.blue[800],
+                        color: kSecondaryColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

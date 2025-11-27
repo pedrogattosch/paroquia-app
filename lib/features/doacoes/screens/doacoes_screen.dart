@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/colors.dart';
 
 class DoacoesScreen extends StatelessWidget {
   final String chavePix = 'pix@paroquiameninodeus.org';
@@ -10,17 +11,12 @@ class DoacoesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: kAppBarGradient,
           ),
         ),
         title: Text(
@@ -42,7 +38,7 @@ class DoacoesScreen extends StatelessWidget {
               mensagem,
               style: GoogleFonts.openSans(
                 fontSize: 16,
-                color: Colors.blueGrey[700],
+                color: kTextColor,
               ),
               textAlign: TextAlign.center,
             ),
@@ -51,9 +47,8 @@ class DoacoesScreen extends StatelessWidget {
               height: 180,
               width: 180,
               decoration: BoxDecoration(
-                color: Colors.grey[50],
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.blue[100]!),
+                color: kCardBackgroundColor,
+                borderRadius: BorderRadius.circular(8),
               ),
               alignment: Alignment.center,
               child: Text(
@@ -61,7 +56,7 @@ class DoacoesScreen extends StatelessWidget {
                 style: GoogleFonts.openSans(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.blueGrey[600],
+                  color: kCardTitleColor,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -70,16 +65,15 @@ class DoacoesScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: Colors.grey[50],
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.blue[100]!),
+                color: kCardBackgroundColor,
+                borderRadius: BorderRadius.circular(8),
               ),
               child: SelectableText(
                 chavePix,
                 style: GoogleFonts.openSans(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue[800],
+                  color: kCardTitleColor,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -99,11 +93,11 @@ class DoacoesScreen extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue[800],
+                backgroundColor: kPrimaryColor,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 elevation: 0, // Remove a sombra do botão
               ),
