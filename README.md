@@ -1,8 +1,8 @@
-# ⛪ Aplicativo Paróquia Menino Deus
+# Aplicativo Paróquia Menino Deus
 
 Este é um aplicativo desenvolvido para que a comunidade da **Paróquia Menino Deus** consiga acompanhar as notícias, eventos, horários das missas, e tenha acesso à liturgia diária e outros serviços.
 
-## 💻 Tecnologias
+## Tecnologias
 
 A tecnologia principal utilizada é o **Flutter**, um kit de ferramentas de criação de interface de usuário do Google, utilizando a linguagem de programação **Dart**.
 
@@ -13,7 +13,7 @@ O projeto utiliza as seguintes bibliotecas para as suas funcionalidades:
 * `http` e `connectivity_plus`: Utilizados na tela de Liturgia para buscar dados da API e verificar a conexão com a internet.
 * `intl`: Para formatação de datas e suporte à pt_BR.
 
-## ⚙️ Pré-requisitos
+## Pré-requisitos
 
 Para executar o projeto localmente, certifique-se de que você tem:
 
@@ -21,7 +21,7 @@ Para executar o projeto localmente, certifique-se de que você tem:
 2.  **Configuração das plataformas**: Configure os toolchains necessários para as plataformas de destino (Android, iOS, Web, etc.).
 3.  **IDE**: Um ambiente de desenvolvimento configurado, sendo os mais recomendados **Visual Studio Code** e **Android Studio**.
 
-## 🚀 Instruções de execução
+## Instruções de execução
 
 1.  Vá até a raiz do projeto no seu terminal.
 
@@ -49,7 +49,7 @@ Para executar o projeto localmente, certifique-se de que você tem:
     ```
     O comando irá rodar na plataforma conectada por padrão. Para rodar especificamente em outra plataforma, use a flag `-d <plataforma>`, como `flutter run -d chrome` para Web.
 
-## ✨ Funcionalidades e telas
+## Funcionalidades e telas
 
 O aplicativo é navegado através de um `BottomNavigationBar` que contém as telas:
 
