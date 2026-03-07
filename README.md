@@ -1,4 +1,4 @@
-# Aplicativo Paróquia Menino Deus
+# ⛪ Aplicativo Paróquia Menino Deus
 
 Este é um aplicativo desenvolvido para que a comunidade da **Paróquia Menino Deus** consiga acompanhar as notícias, eventos, horários das missas, e tenha acesso à liturgia diária e outros serviços.
 
